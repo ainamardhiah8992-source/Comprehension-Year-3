@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adventure Detectives! - Year 3 Reading Comprehension</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:18px;background:#f4f7fb;color:#1f2937;font-family:"Trebuchet MS",Arial,sans-serif;line-height:1.55}
+.container{max-width:790px;margin:auto}
+.card{background:#fff;border:1px solid #dbe3ee;border-radius:22px;padding:24px;box-shadow:0 8px 28px #0f172a12}
+header{text-align:center}.tag{display:inline-block;background:#dbeafe;color:#1d4ed8;padding:5px 12px;border-radius:30px;font-weight:bold}
+h1{font-size:clamp(2rem,6vw,2.8rem);margin:10px 0 4px}.muted{color:#64748b;margin-top:0}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}label{font-weight:bold}
+input{width:100%;padding:10px;border:1px solid #dbe3ee;border-radius:10px;font:inherit;margin-top:5px}
+.picture{display:flex;justify-content:space-around;flex-wrap:wrap;gap:12px;background:linear-gradient(135deg,#eff6ff,#f0fdf4,#fff7ed);padding:18px;border-radius:16px;font-size:2.7rem;text-align:center}
+.picture small{display:block;font-size:.8rem;color:#475569;font-weight:bold}
+.passage{background:#f8fafc;border-left:5px solid #38bdf8;border-radius:12px;padding:16px;margin:10px 0 20px;font-size:1.08rem}
+.story-label{font-size:.85rem;font-weight:bold;color:#075985;background:#e0f2fe;padding:4px 9px;border-radius:8px}
+.row{display:flex;justify-content:space-between;gap:10px}.progress{height:9px;background:#e2e8f0;border-radius:20px;overflow:hidden;margin:8px 0 20px}
+#bar{height:100%;width:0;background:#2563eb;transition:width .2s}.question{font-size:1.2rem;font-weight:bold;margin:18px 0 12px}
+.options{display:grid;gap:10px}.option{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:13px;border:2px solid #dbe3ee;border-radius:13px;background:white;font:inherit;cursor:pointer}
+.option:hover:not(:disabled){border-color:#93c5fd}.option.selected{border-color:#2563eb;background:#eff6ff}.option.correct{border-color:#15803d;background:#dcfce7}.option.wrong{border-color:#b91c1c;background:#fee2e2}
+.letter{width:30px;height:30px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:#f1f5f9;font-weight:bold}
+.feedback{padding:13px 15px;border-radius:12px;margin-top:14px}.good{background:#dcfce7;color:#14532d}.try{background:#fef3c7;color:#78350f}
+button.main,button.secondary{border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:bold;cursor:pointer}button.main{background:#2563eb;color:white;flex:1}button.main:disabled{opacity:.45;cursor:not-allowed}button.secondary{background:#e2e8f0;color:#1f2937}
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.hidden{display:none!important}.center{text-align:center;padding:15px 0}.big-score{font-size:3.4rem;font-weight:900;color:#2563eb}
+.review-item{padding:12px;background:#f8fafc;border-radius:10px;margin:10px 0}footer{text-align:center;color:#64748b;font-size:.85rem;margin:18px}
+@media(max-width:520px){body{padding:10px}.card{padding:16px}.details{grid-template-columns:1fr}}@media print{body{background:white}.card{box-shadow:none}.actions,.details{display:none}}
+</style>
+</head>
+<body>
+<main class="container"><section class="card">
+<header><span class="tag">YEAR 3 ENGLISH · CEFR A1</span><h1>🧭 Adventure Detectives!</h1><p class="muted">Reading Comprehension · 2 Stories · 10 Questions</p></header>
+<div class="details"><label>Your name<input id="studentName" placeholder="Type your name"></label><label>Class<input id="studentClass" placeholder="Type your class"></label></div>
+<div class="picture" aria-label="Places and activities">
+<div>🚌<small>bus</small></div><div>🏞️<small>park</small></div><div>🛍️<small>shops</small></div><div>🌳<small>garden</small></div><div>🏖️<small>beach</small></div><div>⚽<small>football</small></div>
+</div>
+
+<section id="storyOne"><h2>📖 Story 1: Out and About</h2>
+<div class="passage"><span class="story-label">STORY 1</span><br><br>
+On Saturday, Amir went out with his family. First, they took a bus to town. Amir and his sister visited a bookshop. His mother bought a storybook, and his father bought a newspaper. After that, they ate lunch at a café. Amir had a chicken sandwich and orange juice. Before going home, they walked through the park and saw some ducks in the pond. Amir had a lovely day.
+</div></section>
+
+<section id="storyTwo" class="hidden"><h2>📖 Story 2: Where Were You Yesterday?</h2>
+<div class="passage"><span class="story-label">STORY 2</span><br><br>
+Yesterday was Sunday. Aina was at her grandmother's house in the morning. She helped Grandma water the plants. In the afternoon, Aina went to the playground with her cousin, Hafiz. They played on the swings and kicked a ball. Later, they ate noodles at home. Aina was tired but happy. She told her mother about her fun day before bedtime.
+</div></section>
+
+<div class="row"><strong id="counter">Question 1 of 10</strong><strong id="liveScore">Score: 0</strong></div><div class="progress"><div id="bar"></div></div>
+<div id="game"><div id="question" class="question"></div><div id="options" class="options"></div><div id="feedback" class="feedback hidden" aria-live="polite"></div>
+<div class="actions"><button id="check" class="main" disabled>Check answer</button><button id="next" class="main hidden">Next question →</button></div></div>
+
+<section id="results" class="hidden"><div class="center"><div id="trophy" style="font-size:3rem">🏆</div><h2 id="resultTitle">Well done, Detective!</h2><div id="finalScore" class="big-score">0 / 10</div><p id="resultMessage"></p></div><h2>Answer review</h2><div id="review"></div>
+<div class="actions"><button id="again" class="main">↻ Play again</button><button id="print" class="secondary">Print results</button></div></section>
+</section><footer>Read both stories carefully. Choose an answer and learn from the feedback. Good luck!</footer></main>
+
+<script>
+const questions=[
+{story:1,q:"When did Amir go out with his family?",o:["On Saturday","On Monday","On Friday"],a:0,e:"Amir went out with his family on Saturday."},
+{story:1,q:"How did the family travel to town?",o:["By car","By bus","By train"],a:1,e:"They took a bus to town."},
+{story:1,q:"What did Amir's mother buy?",o:["A newspaper","A toy","A storybook"],a:2,e:"His mother bought a storybook."},
+{story:1,q:"What did Amir have for lunch?",o:["A chicken sandwich and orange juice","Noodles and water","Pizza and milk"],a:0,e:"Amir had a chicken sandwich and orange juice."},
+{story:1,q:"What animals did they see in the park?",o:["Cats","Ducks","Monkeys"],a:1,e:"They saw ducks in the pond."},
+{story:2,q:"Where was Aina yesterday morning?",o:["At school","At the beach","At her grandmother's house"],a:2,e:"Aina was at her grandmother's house in the morning."},
+{story:2,q:"What did Aina help Grandma do?",o:["Water the plants","Cook dinner","Wash the car"],a:0,e:"She helped Grandma water the plants."},
+{story:2,q:"Who went to the playground with Aina?",o:["Her brother","Her cousin Hafiz","Her mother"],a:1,e:"Aina went with her cousin, Hafiz."},
+{story:2,q:"What did Aina and Hafiz play on?",o:["The swings","The slide only","A computer"],a:0,e:"They played on the swings and kicked a ball."},
+{story:2,q:"How did Aina feel at the end of the day?",o:["Angry and hungry","Tired but happy","Sad and scared"],a:1,e:"Aina was tired but happy."}
+];
+let current=0,selected=null,checked=false,answers=Array(questions.length).fill(null);
+const el=id=>document.getElementById(id);
+const score=()=>answers.reduce((total,a,i)=>total+(a===questions[i].a?1:0),0);
+function render(){
+const item=questions[current];selected=null;checked=false;
+el("counter").textContent=`Question ${current+1} of ${questions.length}`;el("liveScore").textContent=`Score: ${score()}`;el("bar").style.width=`${current/questions.length*100}%`;
+el("storyOne").classList.toggle("hidden",item.story!==1);el("storyTwo").classList.toggle("hidden",item.story!==2);
+el("question").textContent=item.q;el("options").innerHTML="";el("feedback").className="feedback hidden";el("feedback").textContent="";
+el("check").classList.remove("hidden");el("check").disabled=true;el("next").classList.add("hidden");
+item.o.forEach((text,i)=>{const b=document.createElement("button");b.type="button";b.className="option";const letter=document.createElement("span");letter.className="letter";letter.textContent=String.fromCharCode(65+i);const label=document.createElement("span");label.textContent=text;b.append(letter,label);b.addEventListener("click",()=>choose(i));el("options").appendChild(b)});
+}
+function choose(i){if(checked)return;selected=i;[...el("options").children].forEach((b,j)=>b.classList.toggle("selected",j===i));el("check").disabled=false}
+function checkAnswer(){
+if(selected===null||checked)return;checked=true;answers[current]=selected;const item=questions[current],correct=selected===item.a;
+[...el("options").children].forEach((b,i)=>{b.disabled=true;if(i===item.a)b.classList.add("correct");else if(i===selected)b.classList.add("wrong")});
+el("feedback").className="feedback "+(correct?"good":"try");el("feedback").textContent=(correct?"✅ Correct! ":"💡 Not quite. ")+item.e;
+el("liveScore").textContent=`Score: ${score()}`;el("bar").style.width=`${(current+1)/questions.length*100}%`;
+el("check").classList.add("hidden");el("next").classList.remove("hidden");el("next").textContent=current===questions.length-1?"See my score →":"Next question →";
+}
+function showResults(){
+el("game").classList.add("hidden");el("storyOne").classList.add("hidden");el("storyTwo").classList.add("hidden");el("results").classList.remove("hidden");
+const s=score(),name=el("studentName").value.trim();el("finalScore").textContent=`${s} / ${questions.length}`;el("resultTitle").textContent=name?`Well done, ${name}!`:"Well done, Detective!";
+el("resultMessage").textContent=s===10?"Amazing! You are a super reader!":s>=6?"Good work! Keep practising your reading.":"Good try! Read both stories again and practise.";
+el("trophy").textContent=s===10?"🏆":s>=6?"🌟":"💪";el("review").innerHTML="";
+questions.forEach((q,i)=>{const row=document.createElement("div");row.className="review-item";const title=document.createElement("strong");title.textContent=`${answers[i]===q.a?"✅":"❌"} ${i+1}. ${q.q}`;const answer=document.createElement("div");answer.textContent=`Correct answer: ${q.o[q.a]}`;const story=document.createElement("small");story.textContent=`Story ${q.story}`;story.style.color="#64748b";row.append(title,answer,story);el("review").appendChild(row)});
+el("bar").style.width="100%";
+}
+function restart(){current=0;selected=null;checked=false;answers=Array(questions.length).fill(null);el("results").classList.add("hidden");el("game").classList.remove("hidden");render();window.scrollTo({top:0,behavior:"smooth"})}
+el("check").addEventListener("click",checkAnswer);el("next").addEventListener("click",()=>{if(current<questions.length-1){current++;render()}else showResults()});
+el("again").addEventListener("click",restart);el("print").addEventListener("click",()=>window.print());render();
+</script>
+</body>
+</html>
